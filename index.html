@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div id="login-container" style="display: flex; height: 100vh; align-items: center; justify-content: center; background: var(--bg-main);">
+        <div class="modal-content" style="padding: 40px; text-align: center;">
+            <div class="logo" style="justify-content: center; margin-bottom: 30px;">
+                <svg width="48" height="48" viewBox="0 0 40 40" fill="none">
+                    <rect width="40" height="40" rx="8" fill="#3b82f6"/>
+                    <path d="M20 10v20M10 20h20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span style="font-size: 28px;">HospitalCare</span>
+            </div>
+            <form id="loginForm" class="modal-form" style="text-align: left; padding: 0;">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="loginUsername" required placeholder="admin">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required placeholder="admin">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px; padding: 12px;">Login to Portal</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container" id="app-container" style="display: none;">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <rect width="40" height="40" rx="8" fill="#2563eb"/>
+                        <path d="M20 10v20M10 20h20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>HospitalCare</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <span class="icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="patients">
+                    <span class="icon">👥</span>
+                    <span>Patients</span>
+                </a>
+                <a href="#" class="nav-item" data-page="appointments">
+                    <span class="icon">📅</span>
+                    <span>Appointments</span>
+                </a>
+                <a href="#" class="nav-item" data-page="doctors">
+                    <span class="icon">👨‍⚕️</span>
+                    <span>Doctors</span>
+                </a>
+                <a href="#" class="nav-item" data-page="billing">
+                    <span class="icon">💰</span>
+                    <span>Billing</span>
+                </a>
+                <a href="#" class="nav-item" data-page="reports">
+                    <span class="icon">📈</span>
+                    <span>Reports</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">👨‍💼</div>
+                    <div class="user-info">
+                        <p class="user-name">Admin User</p>
+                        <p class="user-role">Administrator</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button id="menu-toggle" class="menu-toggle">☰</button>
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search...">
+                        <span class="search-icon">🔍</span>
+                    </div>
+                    <button id="refresh-btn" class="btn btn-secondary" style="margin: 0 12px 0 0; height: 44px;">🔄 Refresh</button>
+                    <div class="notification-wrapper" style="position: relative; display: inline-block;">
+                        <button class="notification-btn">
+                            🔔
+                            <span style="position: absolute; top: 8px; right: 8px; background: var(--danger); width: 8px; height: 8px; border-radius: 50%;"></span>
+                        </button>
+                        <div class="notification-menu" style="display: none; position: absolute; right: 0; top: 120%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-card); z-index: 1000; min-width: 250px; padding: 8px 0;">
+                            <div style="padding: 10px 16px; font-weight: bold; border-bottom: 1px solid var(--border);">Notifications</div>
+                            <a href="#" class="notif-item" style="display: block; padding: 10px 16px; color: var(--text-main); text-decoration: none; transition: background 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <strong style="font-size: 13px;">New Patient Assigned</strong><br>
+                                <small style="color: var(--text-muted);">John Doe just registered.</small>
+                            </a>
+                            <a href="#" class="notif-item" style="display: block; padding: 10px 16px; color: var(--text-main); text-decoration: none; transition: background 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <strong style="font-size: 13px;">Invoice Paid</strong><br>
+                                <small style="color: var(--text-muted);">Invoice #INV-2023-001 was paid.</small>
+                            </a>
+                            <a href="#" class="notif-item" style="display: block; padding: 10px 16px; color: var(--text-main); text-decoration: none; transition: background 0.2s;">
+                                <strong style="font-size: 13px;">System Alert</strong><br>
+                                <small style="color: var(--text-muted);">Scheduled maintenance tonight.</small>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="settings-wrapper" style="position: relative; display: inline-block;">
+                        <button class="settings-btn">⚙️</button>
+                        <div class="settings-menu" style="display: none; position: absolute; right: 0; top: 120%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-card); z-index: 1000; min-width: 160px; padding: 8px 0;">
+                            <a href="#" id="profile-settings" class="settings-item" style="display: block; padding: 10px 16px; color: var(--text-main); text-decoration: none; transition: background 0.2s;">Profile Settings</a>
+                            <a href="#" id="system-preferences" class="settings-item" style="display: block; padding: 10px 16px; color: var(--text-main); text-decoration: none; transition: background 0.2s;">System Preferences</a>
+                            <a href="#" id="theme-toggle" class="settings-item" style="display: block; padding: 10px 16px; color: var(--text-main); text-decoration: none; transition: background 0.2s;">Theme (Dark/Light)</a>
+                            <a href="#" id="language-settings" class="settings-item" style="display: block; padding: 10px 16px; color: var(--text-main); text-decoration: none; transition: background 0.2s;">Language (EN)</a>
+                            <a href="#" id="help-support" class="settings-item" style="display: block; padding: 10px 16px; color: var(--text-main); text-decoration: none; transition: background 0.2s;">Help & Support</a>
+                            <hr style="border: none; border-top: 1px solid var(--border); margin: 8px 0;">
+                            <a href="#" id="logout-btn" class="settings-item" style="display: block; padding: 10px 16px; color: #ef4444; text-decoration: none; transition: background 0.2s;">🚪 Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content">
+                <!-- Dashboard Page -->
+                <section id="dashboard" class="page active">
+                    <div class="dashboard-grid">
+                        <!-- Quick Stats -->
+                        <div class="stats-container">
+                            <div class="stat-card">
+                                <div class="stat-icon" style="background: #e3f2fd;">👥</div>
+                                <div class="stat-content">
+                                    <h3>Total Patients</h3>
+                                    <p class="stat-number" id="total-patients">1,248</p>
+                                    <small id="patient-growth" style="color: #10b981;">+12% from last month</small>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon" style="background: #f0fdf4;">📅</div>
+                                <div class="stat-content">
+                                    <h3>Appointments Today</h3>
+                                    <p class="stat-number" id="todays-appointments">23</p>
+                                    <small style="color: #f59e0b;">8 pending</small>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon" style="background: #fef3c7;">👨‍⚕️</div>
+                                <div class="stat-content">
+                                    <h3>Active Doctors</h3>
+                                    <p class="stat-number" id="active-doctors">45</p>
+                                    <small style="color: #3b82f6;">12 on duty</small>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon" style="background: #ffe0e0;">💰</div>
+                                <div class="stat-content">
+                                    <h3>Monthly Revenue</h3>
+                                    <p class="stat-number" id="monthly-revenue">$125K</p>
+                                    <small id="revenue-growth" style="color: #ef4444;">-5% from last month</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activities -->
+                        <div class="activities-container">
+                            <div class="activity-card">
+                                <h3>Recent Appointments</h3>
+                                <div class="activity-list">
+                                    <div class="activity-item">
+                                        <div class="activity-avatar">👤</div>
+                                        <div class="activity-details">
+                                            <p class="activity-title">John Doe - Cardiology</p>
+                                            <small>10:30 AM - Dr. Smith</small>
+                                        </div>
+                                        <span class="badge badge-success">Confirmed</span>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-avatar">👤</div>
+                                        <div class="activity-details">
+                                            <p class="activity-title">Jane Smith - Neurology</p>
+                                            <small>11:00 AM - Dr. Johnson</small>
+                                        </div>
+                                        <span class="badge badge-warning">Pending</span>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-avatar">👤</div>
+                                        <div class="activity-details">
+                                            <p class="activity-title">Mike Wilson - General</p>
+                                            <small>2:00 PM - Dr. Brown</small>
+                                        </div>
+                                        <span class="badge badge-info">Scheduled</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="activity-card">
+                                <h3>Bed Availability</h3>
+                                <div class="bed-status">
+                                    <div class="bed-item">
+                                        <span>General Ward</span>
+                                        <div class="bed-progress">
+                                            <div class="bed-filled" style="width: 75%"></div>
+                                        </div>
+                                        <small>30/40 beds</small>
+                                    </div>
+                                    <div class="bed-item">
+                                        <span>ICU</span>
+                                        <div class="bed-progress">
+                                            <div class="bed-filled" style="width: 90%"></div>
+                                        </div>
+                                        <small>18/20 beds</small>
+                                    </div>
+                                    <div class="bed-item">
+                                        <span>Emergency</span>
+                                        <div class="bed-progress">
+                                            <div class="bed-filled" style="width: 45%"></div>
+                                        </div>
+                                        <small>9/20 beds</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Patients Page -->
+                <section id="patients" class="page">
+                    <div class="page-header">
+                        <h2>Patient Management</h2>
+                        <button class="btn btn-primary" id="add-patient-btn">+ Add New Patient</button>
+                    </div>
+
+                    <div class="filters">
+                        <input type="text" class="filter-input" placeholder="Search patients...">
+                        <select class="filter-select">
+                            <option>All Departments</option>
+                            <option>Cardiology</option>
+                            <option>Neurology</option>
+                            <option>Orthopedics</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>All Status</option>
+                            <option>Active</option>
+                            <option>Discharged</option>
+                            <option>Admitted</option>
+                        </select>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Patient ID</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                                <th>Admission Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patientsTableBody">
+                            <tr>
+                                <td>#P001</td>
+                                <td>John Doe</td>
+                                <td>45</td>
+                                <td>Cardiology</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td>2024-05-10</td>
+                                <td>
+                                    <button class="btn-icon" title="View">👁️</button>
+                                    <button class="btn-icon" title="Edit">✏️</button>
+                                    <button class="btn-icon" title="Delete">🗑️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#P002</td>
+                                <td>Jane Smith</td>
+                                <td>38</td>
+                                <td>Neurology</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td>2024-05-12</td>
+                                <td>
+                                    <button class="btn-icon" title="View">👁️</button>
+                                    <button class="btn-icon" title="Edit">✏️</button>
+                                    <button class="btn-icon" title="Delete">🗑️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#P003</td>
+                                <td>Mike Wilson</td>
+                                <td>52</td>
+                                <td>Orthopedics</td>
+                                <td><span class="badge badge-info">Discharged</span></td>
+                                <td>2024-04-28</td>
+                                <td>
+                                    <button class="btn-icon" title="View">👁️</button>
+                                    <button class="btn-icon" title="Edit">✏️</button>
+                                    <button class="btn-icon" title="Delete">🗑️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#P004</td>
+                                <td>Sarah Johnson</td>
+                                <td>29</td>
+                                <td>General</td>
+                                <td><span class="badge badge-warning">Admitted</span></td>
+                                <td>2024-05-15</td>
+                                <td>
+                                    <button class="btn-icon" title="View">👁️</button>
+                                    <button class="btn-icon" title="Edit">✏️</button>
+                                    <button class="btn-icon" title="Delete">🗑️</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Appointments Page -->
+                <section id="appointments" class="page">
+                    <div class="page-header">
+                        <h2>Appointments</h2>
+                        <button class="btn btn-primary" id="add-appointment-btn">+ Schedule Appointment</button>
+                    </div>
+
+                    <div class="filters">
+                        <input type="date" class="filter-input">
+                        <select class="filter-select">
+                            <option>All Doctors</option>
+                            <option>Dr. Smith</option>
+                            <option>Dr. Johnson</option>
+                            <option>Dr. Brown</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>All Status</option>
+                            <option>Confirmed</option>
+                            <option>Pending</option>
+                            <option>Completed</option>
+                            <option>Cancelled</option>
+                        </select>
+                    </div>
+
+                    <div class="appointments-grid" id="appointmentsGrid">
+                        <div class="appointment-card">
+                            <div class="appointment-header">
+                                <h3>Dr. Smith</h3>
+                                <span class="badge badge-success">Confirmed</span>
+                            </div>
+                            <div class="appointment-details">
+                                <p><strong>Patient:</strong> John Doe</p>
+                                <p><strong>Time:</strong> 10:30 AM</p>
+                                <p><strong>Department:</strong> Cardiology</p>
+                                <p><strong>Duration:</strong> 30 mins</p>
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="btn btn-small btn-info">Reschedule</button>
+                                <button class="btn btn-small btn-danger">Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="appointment-card">
+                            <div class="appointment-header">
+                                <h3>Dr. Johnson</h3>
+                                <span class="badge badge-warning">Pending</span>
+                            </div>
+                            <div class="appointment-details">
+                                <p><strong>Patient:</strong> Jane Smith</p>
+                                <p><strong>Time:</strong> 11:00 AM</p>
+                                <p><strong>Department:</strong> Neurology</p>
+                                <p><strong>Duration:</strong> 45 mins</p>
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="btn btn-small btn-info">Confirm</button>
+                                <button class="btn btn-small btn-danger">Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="appointment-card">
+                            <div class="appointment-header">
+                                <h3>Dr. Brown</h3>
+                                <span class="badge badge-info">Scheduled</span>
+                            </div>
+                            <div class="appointment-details">
+                                <p><strong>Patient:</strong> Mike Wilson</p>
+                                <p><strong>Time:</strong> 2:00 PM</p>
+                                <p><strong>Department:</strong> Orthopedics</p>
+                                <p><strong>Duration:</strong> 30 mins</p>
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="btn btn-small btn-info">Reschedule</button>
+                                <button class="btn btn-small btn-danger">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Doctors Page -->
+                <section id="doctors" class="page">
+                    <div class="page-header">
+                        <h2>Doctor & Staff Management</h2>
+                        <button class="btn btn-primary" id="add-doctor-btn">+ Add New Doctor</button>
+                    </div>
+
+                    <div class="filters">
+                        <input type="text" class="filter-input" placeholder="Search doctors...">
+                        <select class="filter-select">
+                            <option>All Departments</option>
+                            <option>Cardiology</option>
+                            <option>Neurology</option>
+                            <option>Orthopedics</option>
+                        </select>
+                    </div>
+
+                    <div class="doctors-grid" id="doctorsGrid">
+                        <div class="doctor-card">
+                            <div class="doctor-header">
+                                <div class="doctor-avatar">👨‍⚕️</div>
+                                <div class="doctor-status active"></div>
+                            </div>
+                            <h3>Dr. Smith</h3>
+                            <p class="department">Cardiology</p>
+                            <div class="doctor-info">
+                                <p><strong>License:</strong> #LIC12345</p>
+                                <p><strong>Experience:</strong> 12 years</p>
+                                <p><strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                            </div>
+                            <div class="doctor-actions">
+                                <button class="btn btn-small btn-info">Profile</button>
+                                <button class="btn btn-small btn-primary">Edit</button>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-header">
+                                <div class="doctor-avatar">👩‍⚕️</div>
+                                <div class="doctor-status active"></div>
+                            </div>
+                            <h3>Dr. Johnson</h3>
+                            <p class="department">Neurology</p>
+                            <div class="doctor-info">
+                                <p><strong>License:</strong> #LIC12346</p>
+                                <p><strong>Experience:</strong> 8 years</p>
+                                <p><strong>Rating:</strong> ⭐⭐⭐⭐</p>
+                            </div>
+                            <div class="doctor-actions">
+                                <button class="btn btn-small btn-info">Profile</button>
+                                <button class="btn btn-small btn-primary">Edit</button>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-header">
+                                <div class="doctor-avatar">👨‍⚕️</div>
+                                <div class="doctor-status active"></div>
+                            </div>
+                            <h3>Dr. Brown</h3>
+                            <p class="department">Orthopedics</p>
+                            <div class="doctor-info">
+                                <p><strong>License:</strong> #LIC12347</p>
+                                <p><strong>Experience:</strong> 15 years</p>
+                                <p><strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                            </div>
+                            <div class="doctor-actions">
+                                <button class="btn btn-small btn-info">Profile</button>
+                                <button class="btn btn-small btn-primary">Edit</button>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-header">
+                                <div class="doctor-avatar">👩‍⚕️</div>
+                                <div class="doctor-status inactive"></div>
+                            </div>
+                            <h3>Dr. Davis</h3>
+                            <p class="department">General Medicine</p>
+                            <div class="doctor-info">
+                                <p><strong>License:</strong> #LIC12348</p>
+                                <p><strong>Experience:</strong> 6 years</p>
+                                <p><strong>Rating:</strong> ⭐⭐⭐⭐</p>
+                            </div>
+                            <div class="doctor-actions">
+                                <button class="btn btn-small btn-info">Profile</button>
+                                <button class="btn btn-small btn-primary">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Billing Page -->
+                <section id="billing" class="page">
+                    <div class="page-header">
+                        <h2>Billing & Payments</h2>
+                        <button class="btn btn-primary" id="create-invoice-btn">+ Create Invoice</button>
+                    </div>
+
+                    <div class="filters">
+                        <input type="text" class="filter-input" placeholder="Search by patient or invoice...">
+                        <select class="filter-select">
+                            <option>All Status</option>
+                            <option>Paid</option>
+                            <option>Pending</option>
+                            <option>Overdue</option>
+                        </select>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Patient</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoicesTableBody">
+                            <tr>
+                                <td>#INV001</td>
+                                <td>John Doe</td>
+                                <td>$2,500</td>
+                                <td>2024-05-10</td>
+                                <td>2024-05-25</td>
+                                <td><span class="badge badge-success">Paid</span></td>
+                                <td>
+                                    <button class="btn-icon" title="View">👁️</button>
+                                    <button class="btn-icon" title="Download">⬇️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#INV002</td>
+                                <td>Jane Smith</td>
+                                <td>$3,800</td>
+                                <td>2024-05-12</td>
+                                <td>2024-05-27</td>
+                                <td><span class="badge badge-warning">Pending</span></td>
+                                <td>
+                                    <button class="btn-icon" title="View">👁️</button>
+                                    <button class="btn-icon" title="Download">⬇️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#INV003</td>
+                                <td>Mike Wilson</td>
+                                <td>$1,200</td>
+                                <td>2024-04-28</td>
+                                <td>2024-05-13</td>
+                                <td><span class="badge badge-danger">Overdue</span></td>
+                                <td>
+                                    <button class="btn-icon" title="View">👁️</button>
+                                    <button class="btn-icon" title="Download">⬇️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#INV004</td>
+                                <td>Sarah Johnson</td>
+                                <td>$4,100</td>
+                                <td>2024-05-15</td>
+                                <td>2024-05-30</td>
+                                <td><span class="badge badge-warning">Pending</span></td>
+                                <td>
+                                    <button class="btn-icon" title="View">👁️</button>
+                                    <button class="btn-icon" title="Download">⬇️</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Reports Page -->
+                <section id="reports" class="page">
+                    <div class="page-header">
+                        <h2>Reports & Analytics</h2>
+                        <button class="btn btn-primary" id="export-report-btn">📥 Export Report</button>
+                    </div>
+
+                    <div class="reports-grid">
+                        <div class="report-card">
+                            <h3>Monthly Patient Statistics</h3>
+                            <div class="report-stat">
+                                <span>New Patients</span>
+                                <p id="report-new-patients">156</p>
+                            </div>
+                            <div class="report-stat">
+                                <span>Total Admissions</span>
+                                <p id="report-admissions">423</p>
+                            </div>
+                            <div class="report-stat">
+                                <span>Discharged</span>
+                                <p id="report-discharged">389</p>
+                            </div>
+                        </div>
+
+                        <div class="report-card">
+                            <h3>Revenue Overview</h3>
+                            <div class="report-stat">
+                                <span>Total Revenue</span>
+                                <p id="report-total-revenue">$125,000</p>
+                            </div>
+                            <div class="report-stat">
+                                <span>Paid Invoices</span>
+                                <p id="report-paid-invoices">$98,500</p>
+                            </div>
+                            <div class="report-stat">
+                                <span>Pending Payment</span>
+                                <p id="report-pending-payment">$26,500</p>
+                            </div>
+                        </div>
+
+                        <div class="report-card">
+                            <h3>Appointment Metrics</h3>
+                            <div class="report-stat">
+                                <span>Total Appointments</span>
+                                <p id="report-total-appointments">892</p>
+                            </div>
+                            <div class="report-stat">
+                                <span>Completed</span>
+                                <p id="report-appointments-completed">856</p>
+                            </div>
+                            <div class="report-stat">
+                                <span>Cancelled</span>
+                                <p id="report-appointments-cancelled">36</p>
+                            </div>
+                        </div>
+
+                        <div class="report-card">
+                            <h3>Staff Performance</h3>
+                            <div class="report-stat">
+                                <span>Total Doctors</span>
+                                <p id="report-total-doctors">45</p>
+                            </div>
+                            <div class="report-stat">
+                                <span>Average Rating</span>
+                                <p id="report-average-rating">4.7/5</p>
+                            </div>
+                            <div class="report-stat">
+                                <span>Avg. Appointments</span>
+                                <p id="report-avg-appointments">19.8/month</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Add Patient -->
+    <div id="patientModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Patient</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form class="modal-form">
+                <input type="hidden" name="patientId" value="">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date" name="dob" required>
+                </div>
+                <div class="form-group">
+                    <label>Department</label>
+                    <select name="department" required>
+                        <option value="">Select Department</option>
+                        <option>Cardiology</option>
+                        <option>Neurology</option>
+                        <option>Orthopedics</option>
+                        <option>General Medicine</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary modal-close-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Patient</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Add Doctor -->
+    <div id="doctorModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Doctor</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="doctorForm" class="modal-form">
+                <input type="hidden" name="doctorId" value="">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Department</label>
+                    <select name="department" required>
+                        <option value="">Select Department</option>
+                        <option>Cardiology</option>
+                        <option>Neurology</option>
+                        <option>Orthopedics</option>
+                        <option>General Medicine</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Specialization</label>
+                    <input type="text" name="specialization" required>
+                </div>
+                <div class="form-group">
+                    <label>License #</label>
+                    <input type="text" name="license" required>
+                </div>
+                <div class="form-group">
+                    <label>Experience (years)</label>
+                    <input type="number" name="experience" min="0" value="1" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary modal-close-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Doctor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Add Appointment -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Schedule Appointment</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="appointmentForm" class="modal-form">
+                <div class="form-group">
+                    <label>Patient</label>
+                    <select name="patientId" id="appointmentPatientSelect" required>
+                        <option value="">Select Patient</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Doctor</label>
+                    <select name="doctorId" id="appointmentDoctorSelect" required>
+                        <option value="">Select Doctor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label>Time</label>
+                    <input type="time" name="time" required>
+                </div>
+                <div class="form-group">
+                    <label>Duration (mins)</label>
+                    <input type="number" name="duration" min="15" value="30" required>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select name="status" required>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="pending">Pending</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary modal-close-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Schedule Appointment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Create Invoice -->
+    <div id="invoiceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create Invoice</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="invoiceForm" class="modal-form">
+                <div class="form-group">
+                    <label>Patient</label>
+                    <select name="patientId" id="invoicePatientSelect" required>
+                        <option value="">Select Patient</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input type="number" name="amount" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Due Date</label>
+                    <input type="date" name="dueDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select name="status" required>
+                        <option value="pending">Pending</option>
+                        <option value="paid">Paid</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary modal-close-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Invoice</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Invoice View Modal -->
+    <div id="invoiceViewModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>Invoice Details</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-form" id="invoiceDetailsContent">
+                <!-- Injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/data-service.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

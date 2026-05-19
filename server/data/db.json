@@ -1,0 +1,306 @@
+{
+  "patients": [
+    {
+      "id": "P002",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "age": 38,
+      "email": "jane.smith@email.com",
+      "phone": "555-0102",
+      "department": "Neurology",
+      "status": "Active",
+      "admissionDate": "2024-05-12",
+      "condition": "Improving",
+      "bloodType": "A+",
+      "allergies": "None"
+    },
+    {
+      "id": "P003",
+      "firstName": "Mike",
+      "lastName": "Wilson",
+      "age": 52,
+      "email": "mike.wilson@email.com",
+      "phone": "555-0103",
+      "department": "Orthopedics",
+      "status": "Discharged",
+      "admissionDate": "2024-04-28",
+      "condition": "Recovered",
+      "bloodType": "B+",
+      "allergies": "Aspirin"
+    },
+    {
+      "id": "P004",
+      "firstName": "mohan",
+      "lastName": "v",
+      "age": 21,
+      "email": "chethan@gmail.com",
+      "phone": "1234567890",
+      "department": "General Medicine",
+      "status": "Active",
+      "admissionDate": "2026-05-18",
+      "condition": "",
+      "bloodType": "",
+      "allergies": ""
+    },
+    {
+      "id": "P005",
+      "firstName": "abc",
+      "lastName": "D",
+      "age": 26,
+      "email": "jane.smith@email.com",
+      "phone": "555-0102",
+      "department": "Neurology",
+      "status": "Active",
+      "admissionDate": "2026-05-19",
+      "condition": "",
+      "bloodType": "",
+      "allergies": ""
+    }
+  ],
+  "doctors": [
+    {
+      "id": "D001",
+      "firstName": "Alex",
+      "lastName": "Smith",
+      "title": "Dr.",
+      "email": "smith@hospital.com",
+      "phone": "555-1001",
+      "department": "Cardiology",
+      "license": "#LIC12345",
+      "experience": 12,
+      "rating": 5,
+      "status": "active",
+      "specialization": "Heart Diseases"
+    },
+    {
+      "id": "D002",
+      "firstName": "Emma",
+      "lastName": "Johnson",
+      "title": "Dr.",
+      "email": "johnson@hospital.com",
+      "phone": "555-1002",
+      "department": "Neurology",
+      "license": "#LIC12346",
+      "experience": 8,
+      "rating": 4,
+      "status": "active",
+      "specialization": "Neurodegenerative Diseases"
+    },
+    {
+      "id": "D003",
+      "firstName": "Liam",
+      "lastName": "Brown",
+      "title": "Dr.",
+      "email": "brown@hospital.com",
+      "phone": "555-1003",
+      "department": "Orthopedics",
+      "license": "#LIC12347",
+      "experience": 15,
+      "rating": 5,
+      "status": "active",
+      "specialization": "Sports Medicine"
+    },
+    {
+      "id": "D004",
+      "firstName": "dnaskldna",
+      "lastName": "skjnskjdn",
+      "title": "Dr.",
+      "email": "jnsajdnajkdnjwadn@gmail.com",
+      "phone": "14465151561",
+      "department": "Orthopedics",
+      "license": "jnxasjknx",
+      "experience": 4,
+      "rating": 4,
+      "status": "active",
+      "specialization": "asnjsn"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "A001",
+      "patientId": "P001",
+      "patientName": "John Doe",
+      "doctorId": "D001",
+      "doctorName": "Dr. Alex Smith",
+      "department": "Cardiology",
+      "date": "2024-05-18",
+      "time": "10:30",
+      "duration": 30,
+      "status": "confirmed",
+      "notes": "Regular checkup"
+    },
+    {
+      "id": "A002",
+      "patientId": "P002",
+      "patientName": "Jane Smith",
+      "doctorId": "D002",
+      "doctorName": "Dr. Emma Johnson",
+      "department": "Neurology",
+      "date": "2024-05-18",
+      "time": "11:00",
+      "duration": 45,
+      "status": "pending",
+      "notes": "Follow-up consultation"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "INV001",
+      "patientId": "P001",
+      "patientName": "John Doe",
+      "amount": 2500,
+      "date": "2024-05-10",
+      "dueDate": "2024-05-25",
+      "status": "paid",
+      "items": [
+        {
+          "description": "Consultation",
+          "amount": 500
+        },
+        {
+          "description": "ECG Test",
+          "amount": 800
+        },
+        {
+          "description": "Medications",
+          "amount": 1200
+        }
+      ]
+    },
+    {
+      "id": "INV002",
+      "patientId": "P002",
+      "patientName": "Jane Smith",
+      "amount": 3800,
+      "date": "2024-05-12",
+      "dueDate": "2024-05-27",
+      "status": "pending",
+      "items": [
+        {
+          "description": "Consultation",
+          "amount": 500
+        },
+        {
+          "description": "MRI Scan",
+          "amount": 2800
+        },
+        {
+          "description": "Follow-up",
+          "amount": 500
+        }
+      ]
+    },
+    {
+      "id": "INV003",
+      "patientId": "P004",
+      "patientName": "mohan v",
+      "amount": 2000,
+      "date": "2026-05-18",
+      "dueDate": "2026-05-18",
+      "status": "paid",
+      "items": []
+    },
+    {
+      "id": "INV004",
+      "patientId": "P002",
+      "patientName": "Jane Smith",
+      "amount": 12500000,
+      "date": "2026-05-18",
+      "dueDate": "2026-05-19",
+      "status": "paid",
+      "items": []
+    },
+    {
+      "id": "INV005",
+      "patientId": "P002",
+      "patientName": "Jane Smith",
+      "amount": 12500000,
+      "date": "2026-05-19",
+      "dueDate": "2026-05-19",
+      "status": "pending",
+      "items": []
+    },
+    {
+      "id": "INV006",
+      "patientId": "P002",
+      "patientName": "Jane Smith",
+      "amount": 12500000000,
+      "date": "2026-05-19",
+      "dueDate": "2026-05-19",
+      "status": "paid",
+      "items": []
+    },
+    {
+      "id": "INV007",
+      "patientId": "P005",
+      "patientName": "abc D",
+      "amount": 12500000,
+      "date": "2026-05-19",
+      "dueDate": "2026-05-20",
+      "status": "pending",
+      "items": []
+    },
+    {
+      "id": "INV008",
+      "patientId": "P005",
+      "patientName": "abc D",
+      "amount": 12500000,
+      "date": "2026-05-19",
+      "dueDate": "2026-05-20",
+      "status": "paid",
+      "items": []
+    }
+  ],
+  "users": [
+    {
+      "id": "U001",
+      "email": "admin@hospital.com",
+      "password": "Admin@123",
+      "firstName": "Admin",
+      "lastName": "User",
+      "role": "admin"
+    }
+  ],
+  "departments": [
+    {
+      "id": 1,
+      "name": "Cardiology",
+      "icon": "❤️"
+    },
+    {
+      "id": 2,
+      "name": "Neurology",
+      "icon": "🧠"
+    },
+    {
+      "id": 3,
+      "name": "Orthopedics",
+      "icon": "🦴"
+    },
+    {
+      "id": 4,
+      "name": "General Medicine",
+      "icon": "👨‍⚕️"
+    },
+    {
+      "id": 5,
+      "name": "Pediatrics",
+      "icon": "👶"
+    },
+    {
+      "id": 6,
+      "name": "Psychiatry",
+      "icon": "🧠"
+    },
+    {
+      "id": 7,
+      "name": "Surgery",
+      "icon": "🔪"
+    },
+    {
+      "id": 8,
+      "name": "Emergency",
+      "icon": "🚑"
+    }
+  ]
+}

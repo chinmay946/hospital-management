@@ -1,0 +1,304 @@
+/* Responsive Design */
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 16px;
+    }
+
+    .sidebar-header {
+        padding: 12px 0;
+        border-bottom: none;
+    }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        border-bottom: 1px solid var(--border-color);
+        padding: 12px 0;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .main-content {
+        flex: 1;
+    }
+
+    .top-header {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .header-right {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .search-box input {
+        width: 150px;
+    }
+
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+
+    .appointments-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .doctors-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .reports-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .filters {
+        flex-wrap: wrap;
+    }
+
+    .data-table {
+        font-size: 12px;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 12px 8px;
+    }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+    .container {
+        height: auto;
+    }
+
+    .content {
+        padding: 16px;
+    }
+
+    #page-title {
+        font-size: 18px;
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+
+    .logo span {
+        display: none;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .activities-container {
+        grid-template-columns: 1fr;
+    }
+
+    .doctors-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .appointment-card {
+        padding: 16px;
+    }
+
+    .doctor-card {
+        padding: 16px;
+    }
+
+    .report-card {
+        padding: 16px;
+    }
+
+    .modal-content {
+        width: 95%;
+    }
+
+    .data-table {
+        display: block;
+        overflow-x: auto;
+        border-radius: 0;
+    }
+
+    .data-table thead {
+        display: none;
+    }
+
+    .data-table tr {
+        display: block;
+        border: 1px solid var(--border-color);
+        margin-bottom: 12px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .data-table td {
+        display: block;
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .data-table td:before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--text-dark);
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .data-table td:last-child {
+        border-bottom: none;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .filter-input,
+    .filter-select {
+        width: 100%;
+    }
+
+    .page-header h2 {
+        font-size: 18px;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+}
+
+/* Small devices (320px) */
+@media (max-width: 320px) {
+    .logo {
+        font-size: 14px;
+    }
+
+    .stat-number {
+        font-size: 20px;
+    }
+
+    .modal-header h2 {
+        font-size: 16px;
+    }
+
+    .form-group input,
+    .form-group select {
+        font-size: 16px;
+    }
+}
+
+/* Dark Mode Support (optional) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --light-bg: #111827;
+        --dark-bg: #f9fafb;
+        --text-dark: #f9fafb;
+        --text-light: #d1d5db;
+        --border-color: #374151;
+    }
+
+    body {
+        background-color: var(--light-bg);
+    }
+
+    .sidebar,
+    .top-header,
+    .content,
+    .modal-content,
+    .stat-card,
+    .chart-card,
+    .activity-card,
+    .appointment-card,
+    .doctor-card,
+    .report-card,
+    .data-table {
+        background: #1f2937;
+        border-color: var(--border-color);
+    }
+
+    .form-group input,
+    .form-group select,
+    .filter-input,
+    .filter-select {
+        background: #111827;
+        color: var(--text-dark);
+        border-color: var(--border-color);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .sidebar,
+    .top-header,
+    .menu-toggle,
+    .notification-btn,
+    .settings-btn,
+    .search-box,
+    .filters,
+    .btn {
+        display: none;
+    }
+
+    .content {
+        padding: 0;
+    }
+
+    .data-table {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}
