@@ -87,18 +87,36 @@
             <!-- Top Header -->
             <header class="top-header">
                 <div class="header-left">
-                    <button id="menu-toggle" class="menu-toggle">☰</button>
-                    <h1 id="page-title">Dashboard</h1>
+                    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle sidebar">☰</button>
+                    <div class="brand">
+                        <div class="brand-icon">
+                            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+                                <rect width="40" height="40" rx="8" fill="#3b82f6"/>
+                                <path d="M20 10v20M10 20h20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="brand-copy">
+                            <span class="brand-title">MediCare</span>
+                            <span class="brand-subtitle">Hospital Operations Hub</span>
+                        </div>
+                    </div>
+                    <nav class="top-nav">
+                        <a href="#" class="top-link active">Overview</a>
+                        <a href="#" class="top-link">Patients</a>
+                        <a href="#" class="top-link">Appointments</a>
+                        <a href="#" class="top-link">Reports</a>
+                    </nav>
                 </div>
+
                 <div class="header-right">
                     <div class="search-box">
-                        <input type="text" placeholder="Search...">
+                        <input type="text" placeholder="Search hospital data...">
                         <span class="search-icon">🔍</span>
                     </div>
                     <div class="notification-wrapper" style="position: relative; display: inline-block;">
                         <button class="notification-btn">
                             🔔
-                            <span style="position: absolute; top: 8px; right: 8px; background: var(--danger); width: 8px; height: 8px; border-radius: 50%;"></span>
+                            <span class="notification-badge"></span>
                         </button>
                         <div class="notification-menu" style="display: none; position: absolute; right: 0; top: 120%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-card); z-index: 1000; min-width: 250px; padding: 8px 0;">
                             <div style="padding: 10px 16px; font-weight: bold; border-bottom: 1px solid var(--border);">Notifications</div>
@@ -128,6 +146,10 @@
                             <a href="#" id="logout-btn" class="settings-item" style="display: block; padding: 10px 16px; color: #ef4444; text-decoration: none; transition: background 0.2s;">🚪 Logout</a>
                         </div>
                     </div>
+                    <button class="profile-pill" type="button">
+                        <span class="profile-avatar">A</span>
+                        <span class="profile-name">Admin</span>
+                    </button>
                 </div>
             </header>
 
