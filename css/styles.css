@@ -85,8 +85,40 @@ body {
 
 /* Layout */
 .container {
+    display: block;
+    min-height: 100vh;
+}
+
+/* Top Navigation */
+.main-navbar {
     display: flex;
-    height: 100vh;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-left: 12px;
+}
+
+.main-navbar .nav-item {
+    padding: 10px 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid transparent;
+    transition: var(--transition);
+}
+
+.main-navbar .nav-item:hover {
+    background: rgba(59, 130, 246, 0.12);
+    color: var(--text-main);
+    border-color: rgba(59, 130, 246, 0.2);
+    transform: none;
+}
+
+.main-navbar .nav-item.active {
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--text-main);
+    border-color: rgba(59, 130, 246, 0.35);
 }
 
 /* Sidebar */

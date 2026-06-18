@@ -32,62 +32,11 @@
     </div>
 
     <div class="container" id="app-container" style="display: none;">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                        <rect width="40" height="40" rx="8" fill="#2563eb"/>
-                        <path d="M20 10v20M10 20h20" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                    <span>MediCare</span>
-                </div>
-            </div>
-            
-            <nav class="nav-menu">
-                <a href="#" class="nav-item active" data-page="dashboard">
-                    <span class="icon">📊</span>
-                    <span>Dashboard</span>
-                </a>
-                <a href="#" class="nav-item" data-page="patients">
-                    <span class="icon">👥</span>
-                    <span>Patients</span>
-                </a>
-                <a href="#" class="nav-item" data-page="appointments">
-                    <span class="icon">📅</span>
-                    <span>Appointments</span>
-                </a>
-                <a href="#" class="nav-item" data-page="doctors">
-                    <span class="icon">👨‍⚕️</span>
-                    <span>Doctors</span>
-                </a>
-                <a href="#" class="nav-item" data-page="billing">
-                    <span class="icon">💰</span>
-                    <span>Billing</span>
-                </a>
-                <a href="#" class="nav-item" data-page="reports">
-                    <span class="icon">📈</span>
-                    <span>Reports</span>
-                </a>
-            </nav>
-
-            <div class="sidebar-footer">
-                <div class="user-profile">
-                    <div class="avatar">👨‍💼</div>
-                    <div class="user-info">
-                        <p class="user-name">Admin User</p>
-                        <p class="user-role">Administrator</p>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
         <!-- Main Content -->
         <main class="main-content">
             <!-- Top Header -->
             <header class="top-header">
                 <div class="header-left">
-                    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle sidebar">☰</button>
                     <div class="brand">
                         <div class="brand-icon">
                             <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
@@ -100,11 +49,31 @@
                             <span class="brand-subtitle">Hospital Operations Hub</span>
                         </div>
                     </div>
-                    <nav class="top-nav">
-                        <a href="#" class="top-link active">Overview</a>
-                        <a href="#" class="top-link">Patients</a>
-                        <a href="#" class="top-link">Appointments</a>
-                        <a href="#" class="top-link">Reports</a>
+                    <nav class="main-navbar">
+                        <a href="#" class="nav-item active" data-page="dashboard">
+                            <span class="icon">📊</span>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="#" class="nav-item" data-page="patients">
+                            <span class="icon">👥</span>
+                            <span>Patients</span>
+                        </a>
+                        <a href="#" class="nav-item" data-page="appointments">
+                            <span class="icon">📅</span>
+                            <span>Appointments</span>
+                        </a>
+                        <a href="#" class="nav-item" data-page="doctors">
+                            <span class="icon">👨‍⚕️</span>
+                            <span>Doctors</span>
+                        </a>
+                        <a href="#" class="nav-item" data-page="billing">
+                            <span class="icon">💰</span>
+                            <span>Billing</span>
+                        </a>
+                        <a href="#" class="nav-item" data-page="reports">
+                            <span class="icon">📈</span>
+                            <span>Reports</span>
+                        </a>
                     </nav>
                 </div>
 
@@ -444,7 +413,7 @@
                     </div>
 
                     <div class="doctors-grid" id="doctorsGrid">
-                        <div class="doctor-card">
+                        <div class="doctor-card" data-id="D001">
                             <div class="doctor-header">
                                 <div class="doctor-avatar">👨‍⚕️</div>
                                 <div class="doctor-status active"></div>
@@ -457,12 +426,12 @@
                                 <p><strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
                             </div>
                             <div class="doctor-actions">
-                                <button class="btn btn-small btn-info">Profile</button>
-                                <button class="btn btn-small btn-primary">Edit</button>
+                                <button class="btn btn-small btn-info" data-action="view">Profile</button>
+                                <button class="btn btn-small btn-primary" data-action="edit">Edit</button>
                             </div>
                         </div>
 
-                        <div class="doctor-card">
+                        <div class="doctor-card" data-id="D002">
                             <div class="doctor-header">
                                 <div class="doctor-avatar">👩‍⚕️</div>
                                 <div class="doctor-status active"></div>
@@ -475,12 +444,12 @@
                                 <p><strong>Rating:</strong> ⭐⭐⭐⭐</p>
                             </div>
                             <div class="doctor-actions">
-                                <button class="btn btn-small btn-info">Profile</button>
-                                <button class="btn btn-small btn-primary">Edit</button>
+                                <button class="btn btn-small btn-info" data-action="view">Profile</button>
+                                <button class="btn btn-small btn-primary" data-action="edit">Edit</button>
                             </div>
                         </div>
 
-                        <div class="doctor-card">
+                        <div class="doctor-card" data-id="D003">
                             <div class="doctor-header">
                                 <div class="doctor-avatar">👨‍⚕️</div>
                                 <div class="doctor-status active"></div>
@@ -493,12 +462,12 @@
                                 <p><strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
                             </div>
                             <div class="doctor-actions">
-                                <button class="btn btn-small btn-info">Profile</button>
-                                <button class="btn btn-small btn-primary">Edit</button>
+                                <button class="btn btn-small btn-info" data-action="view">Profile</button>
+                                <button class="btn btn-small btn-primary" data-action="edit">Edit</button>
                             </div>
                         </div>
 
-                        <div class="doctor-card">
+                        <div class="doctor-card" data-id="D004">
                             <div class="doctor-header">
                                 <div class="doctor-avatar">👩‍⚕️</div>
                                 <div class="doctor-status inactive"></div>
@@ -511,8 +480,8 @@
                                 <p><strong>Rating:</strong> ⭐⭐⭐⭐</p>
                             </div>
                             <div class="doctor-actions">
-                                <button class="btn btn-small btn-info">Profile</button>
-                                <button class="btn btn-small btn-primary">Edit</button>
+                                <button class="btn btn-small btn-info" data-action="view">Profile</button>
+                                <button class="btn btn-small btn-primary" data-action="edit">Edit</button>
                             </div>
                         </div>
                     </div>

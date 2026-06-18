@@ -563,22 +563,25 @@ class HospitalManagementApp {
     bindDoctorActions() {
         const grid = document.getElementById('doctorsGrid');
         if (!grid) return;
+        if (grid.dataset.doctorActionsBound === 'true') return;
 
-        grid.querySelectorAll('[data-action]').forEach(button => {
-            button.addEventListener('click', () => {
-                const doctorId = button.closest('.doctor-card')?.getAttribute('data-id');
-                if (!doctorId) return;
+        grid.dataset.doctorActionsBound = 'true';
+        grid.addEventListener('click', (event) => {
+            const button = event.target.closest('[data-action]');
+            if (!button || !grid.contains(button)) return;
 
-                const doctor = DataService.getDoctorById(doctorId);
-                if (!doctor) return;
+            const doctorId = button.closest('.doctor-card')?.getAttribute('data-id');
+            if (!doctorId) return;
 
-                const action = button.getAttribute('data-action');
-                if (action === 'view') {
-                    this.openDoctorModal('view', doctor);
-                } else if (action === 'edit') {
-                    this.openDoctorModal('edit', doctor);
-                }
-            });
+            const doctor = DataService.getDoctorById(doctorId);
+            if (!doctor) return;
+
+            const action = button.getAttribute('data-action');
+            if (action === 'view') {
+                this.openDoctorModal('view', doctor);
+            } else if (action === 'edit') {
+                this.openDoctorModal('edit', doctor);
+            }
         });
     }
 
